@@ -1,11 +1,12 @@
-function Router(config) {                                                    // CONSTRUCTOR
+function RxRouter(config) {                                                    // CONSTRUCTOR
 	this.routes= {};
 	this.otherwise= "/#"+config.otherwise;
 	this.page= document.querySelector(config.page);
+
 	this._listeners();
 }
 
-Router.prototype._display_template= function(route) {                       // Templating side
+RxRouter.prototype._display_template= function(route) {                       // Templating side
 	if(route.template) {                            // Show template from element
 		this.page.innerHTML= document.querySelector(route.template).innerHTML;
 	} else if(route.template_url) {                 // Show template from file
@@ -23,22 +24,32 @@ Router.prototype._display_template= function(route) {                       // T
 	this._listeners('main');
 };
 
-Router.prototype._check_route= function() {                                 // Check if route exists
-	var dir= "/"+window.location.hash;
+RxRouter.prototype.sub_route= function(route,parts) {
+	route.sub(parts[3]);
+};
 
-	if(this.routes[dir]) {                          // Route exists
-		this._display_template(this.routes[dir]);
-	} else {                                        // It doesn't. Goto `otherwise`.
+RxRouter.prototype.route_check= function() {                                 // Check if route exists
+	var dir= "/"+window.location.hash;
+	var small= dir.split("/");
+
+	var route= this.routes[dir];
+	var sub_route= this.routes[small.slice(0,3).join("/")];
+
+	if(route) {                          // Route exists
+		this._display_template(route);
+	} else if(small.length == 4 && sub_route.sub) {
+		this.sub_route(sub_route,small);
+	} else {                                        // If it doesn't, goto `otherwise`.
 		this.goto_link(this.otherwise);
 	}
 };
 
-Router.prototype._gogo_there= function(_this) {                             // Go to link in data-href
+RxRouter.prototype._gogo_there= function(_this) {                             // Go to link in data-href
 	var url= this.routes["/#"+_this.getAttribute("data-href")].url;
 	this.goto_link(url);
 };
 
-Router.prototype._listeners= function(page) {                               // data-href click listeners
+RxRouter.prototype._listeners= function(page) {                               // data-href click listeners
 	var _this= this;
 	var href;
 
@@ -58,19 +69,18 @@ Router.prototype._listeners= function(page) {                               // d
 	}
 };
 
-Router.prototype.goto_link= function(url) {                                 // Go to link
+RxRouter.prototype.goto_link= function(url) {                                 // Go to link
     window.location.replace(url);
-    this._check_route();
+    this.route_check();
 };
 
-Router.prototype.route= function(data) {                                    // Set a route
+RxRouter.prototype.route= function(data) {                                    // Set a route
 	if(data.name && data.url && (data.template || data.template_url || data.text) && data.data) {
 		data.url= "/#"+data.url;
 		this.routes[data.url]= data;
 	} else {                                        // Error
 		console.error("Error in route definition.","\n",data);
 	}
-	this._check_route();                            // Call to check url at every route
 };
 
 
@@ -78,12 +88,12 @@ Router.prototype.route= function(data) {                                    // S
 
 /* User stuff down here */
 
-var router= new Router({
+var rx= new RxRouter({
 	otherwise: "/",
 	page: "main"
 });
 
-router.route({
+rx.route({
 	name: "index",
 	url: "/",
 	template: "#index",
@@ -92,16 +102,19 @@ router.route({
 	}
 });
 
-router.route({
+rx.route({
 	name: "about",
 	url: "/about",
 	text: "About Me",
 	data: {
 		text: "Text some"
+	},
+	sub: function(i) {
+		alert(i);
 	}
 });
 
-router.route({
+rx.route({
 	name: "contact",
 	url: "/contact",
 	template: "#conta",
@@ -109,3 +122,14 @@ router.route({
 		text: "Text some"
 	}
 });
+
+rx.route({
+	name: "about",
+	url: "/about/mew",
+	text: "Mew About",
+	data: {
+		text: "Text some"
+	}
+});
+
+rx.route_check();
