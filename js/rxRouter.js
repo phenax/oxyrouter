@@ -12,6 +12,8 @@ RxRouter.prototype._display_template= function(route) {                       //
 	} else if(route.template_url) {                 // Show template from file
 		/*var _this= this;
 
+		// on success, execute route.success
+
 		$.get(route.template_url,function(template_content) {
 			_this.page.innerHTML= (template_content);
 		});*/
@@ -24,7 +26,7 @@ RxRouter.prototype._display_template= function(route) {                       //
 	this._listeners('main');
 };
 
-RxRouter.prototype.sub_route= function(route,parts) {
+RxRouter.prototype._sub_route= function(route,parts) {
 	route.sub(parts[3]);
 };
 
@@ -38,7 +40,7 @@ RxRouter.prototype.route_check= function() {                                 // 
 	if(route) {                          // Route exists
 		this._display_template(route);
 	} else if(small.length == 4 && sub_route.sub) {
-		this.sub_route(sub_route,small);
+		this._sub_route(sub_route,small);
 	} else {                                        // If it doesn't, goto `otherwise`.
 		this.goto_link(this.otherwise);
 	}
@@ -90,7 +92,7 @@ RxRouter.prototype.route= function(data) {                                    //
 
 var rx= new RxRouter({
 	otherwise: "/",
-	page: "main"
+	page: ".container"
 });
 
 rx.route({
@@ -115,21 +117,26 @@ rx.route({
 });
 
 rx.route({
-	name: "contact",
-	url: "/contact",
-	template: "#conta",
+	name: "details",
+	url: "/details",
+	template: "#details",
 	data: {
 		text: "Text some"
 	}
 });
 
+/*
 rx.route({
 	name: "about",
 	url: "/about/mew",
-	text: "Mew About",
+	template_url: "./part.html",
 	data: {
 		text: "Text some"
+	},
+	success: function() {
+		alert("loaded");
 	}
 });
+*/
 
 rx.route_check();

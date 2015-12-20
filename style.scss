@@ -3,8 +3,91 @@
 body {
 	margin:0;
 	padding:0;
+	background-color:#ddd;
 }
 * {
-	font-family:Helvetica,sans-serif;
-	color:#888;
+	font-family:$font;
+	color:#555;
+	box-sizing:border-box;
+}
+
+nav {
+	padding:20px;
+
+	ul {
+		list-style:none;
+		padding:0;
+		margin:0;
+		padding-right:30px;
+		text-align: right;
+
+		li {
+			display:inline-block;
+			padding:0;
+
+			button {
+				outline:none;
+				border:none;
+				padding:10px 15px;
+				font-size:1em;
+				background-color:transparent;
+				cursor:pointer;
+				@include transition(all 0.2s ease-in-out);
+
+				&:hover {
+					color:$blue;
+				}
+			}
+		}
+	}
+}
+
+.container {
+	min-width:200px;
+	max-width:900px;
+	margin:30px auto;
+	background-color:#fff;
+	padding:50px 20px;
+	@include box-shadow(0 0 10px 2px rgba(0,0,0,0.2));
+}
+
+.title {
+	font-size:2em;
+	text-align:center;
+	padding:10px 0;
+	border-bottom:2px solid $blue;
+}
+
+.content {
+	font-size:1em;
+	padding:10px;
+}
+
+.step {
+	padding:20px 5px;
+	margin-top:20px;
+
+	.sub-title {
+		font-size:1.3em;
+		border-left:6px solid $red;
+		padding:10px 5px 10px 20px;
+		margin-bottom:30px;
+		font-weight:bold;
+	}
+
+	.text {
+		padding:10px;
+
+		code {
+			text-align:left;
+			background-color:#eee;
+			padding:1px 10px;
+
+			&.block {
+				display:block;
+				padding-left:20px;
+			}
+		}
+
+	}
 }

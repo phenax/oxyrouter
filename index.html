@@ -5,21 +5,75 @@
 </head>
 <body>
 
-<button data-href="/about">About</button>
-<button data-href="/">Home</button>
-<button data-href="/contact">Contact</button>
+<nav>
+	<ul>
+		<li><button data-href="/">Home</button></li>
+		<li><button data-href="/details">How to use it</button></li>
+		<li><button data-href="/about">About</button></li>
+	</ul>
+</nav>
 
-<main>
+<div class='container'>
 
-</main>
+</div>
 
 <script id='index' type='text/template'>
-	Bello
+	<h1 class='title'>rxRouter</h1>
+	<div class='content'>
+		rxRouter is a simple plugin to start making front-end routes.
+	</div>
 </script>
-<script id='conta' type='text/template'>
-	Contact Me bruh!
+<script id='details' type='text/template'>
+	<h1 class='title'>How to</h1>
+	<div class='content'>
+		<div class='step'>
+			<div class='sub-title'>Initiating rxRouter</div>
+			<div class='text'>
+				<pre><code class='block'>
+var rx= new RxRouter({
+	otherwise: '/',
+	page: '.container'
+});
+				</code></pre>
+				Now lets get explainin'.<br />
+				<ol>
+					<li> <code class='inline'>new RxRouter</code> is where it all starts.</li>
+					<li> <code class='inline'>otherwise: '/'</code>. This redirects requests from undefined routes to '/'.</li>
+					<li> <code class='inline'>page: '.container'</code>. Here, '.container' is css selector for the div where you want the contents to be placed.</li>
+				</ol>
+			</div>
+		</div>
+		<div class='step'>
+			<div class='sub-title'>Create a route</div>
+			<div class='text'>
+				<pre><code class='block'>
+rx.route({
+	name: 'about',
+	url: '/about',
+	template: '#about',
+	data: {
+		text: "Hello"
+	}
+});
+				</code></pre><br />
+				<ol>
+					<li> <code class='inline'>rx.route</code> is used to create a route.</li>
+					<li> <code class='inline'>name: 'about'</code>. Used to identify your route(doesn't matter what it is).</li>
+					<li> <code class='inline'>url: '/about'</code>. Create a route at the url /#/about. </li>
+					<li> <code class='inline'>template: '#about'</code>. CSS selector for the template. </li>
+					<li> <code class='inline'>data: { text: "Hello" }</code>. Rendering text. </li>
+					<br />
+					<div style='font-weight:bold;padding:5px;'>Other stuff you can try</div>
+					<li> <code class='inline'>text: "Hello"</code>. To be used instead of template for rendering text. </li>
+					<li> <code class='inline'>template_url: "./part.html"</code>. To be used instead of template for templating using an html file. </li>
+					<li> <code class='inline'>success: function() { alert("Done"); }</code>. This will be executed everytime the template is done rendering. This is only used with template_url.</li>
+					<li> <code class='inline'>sub: function(r) { }</code>. This function is a sub-router. You can use it to create url for specific posts (Eg- /post/2 or /user/akshay) and 'r' is the id(the '2' in /post/2).</li>
+				</ol>
+			</div>
+		</div>
+	</div>
 </script>
 
-<script src="./js/script.js"></script>
+<script src="./js/rxRouter.js"></script>
 </body>
 </html>
