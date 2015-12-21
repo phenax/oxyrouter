@@ -7,9 +7,9 @@
 
 <nav>
 	<ul>
-		<li><button data-href="/">Home</button></li>
-		<li><button data-href="/details">How to use it</button></li>
-		<li><button data-href="/about">About</button></li>
+		<li><button data-href="/" data-selected='selected'>Home</button></li>
+		<li><button data-href="/details" data-selected='selected'>How to use it</button></li>
+		<li><button data-href="/about" data-selected='selected'>About</button></li>
 	</ul>
 </nav>
 
@@ -20,7 +20,11 @@
 <script id='index' type='text/template'>
 	<h1 class='title'>rxRouter</h1>
 	<div class='content'>
-		rxRouter is a simple plugin to start making front-end routes.
+		&emsp;&emsp;&emsp;rxRouter is a simple plugin for making front-end routes super-easy to use. Don't think much about the name, it wasn't meant to make any sense. <br />
+				<div>
+					<button class='shoot' data-href='/details'>Learn rxRouter</button>
+				</div><br />
+
 	</div>
 </script>
 <script id='details' type='text/template'>
@@ -35,12 +39,12 @@ var rx= new RxRouter({
 	page: '.container'
 });
 				</code></pre>
-				Now lets get explainin'.<br />
-				<ol>
+				<br />
+				<ul>
 					<li> <code class='inline'>new RxRouter</code> is where it all starts.</li>
 					<li> <code class='inline'>otherwise: '/'</code>. This redirects requests from undefined routes to '/'.</li>
 					<li> <code class='inline'>page: '.container'</code>. Here, '.container' is css selector for the div where you want the contents to be placed.</li>
-				</ol>
+				</ul>
 			</div>
 		</div>
 		<div class='step'>
@@ -52,23 +56,61 @@ rx.route({
 	url: '/about',
 	template: '#about',
 	data: {
-		text: "Hello"
+		info: "Hello"
 	}
 });
-				</code></pre><br />
-				<ol>
+				</code></pre>
+				<br />
+				<ul>
 					<li> <code class='inline'>rx.route</code> is used to create a route.</li>
 					<li> <code class='inline'>name: 'about'</code>. Used to identify your route(doesn't matter what it is).</li>
 					<li> <code class='inline'>url: '/about'</code>. Create a route at the url /#/about. </li>
 					<li> <code class='inline'>template: '#about'</code>. CSS selector for the template. </li>
-					<li> <code class='inline'>data: { text: "Hello" }</code>. Rendering text. </li>
+					<li> <code class='inline'>data: { info: "Hello" }</code>. Rendering text. </li>
 					<br />
 					<div style='font-weight:bold;padding:5px;'>Other stuff you can try</div>
 					<li> <code class='inline'>text: "Hello"</code>. To be used instead of template for rendering text. </li>
 					<li> <code class='inline'>template_url: "./part.html"</code>. To be used instead of template for templating using an html file. </li>
 					<li> <code class='inline'>success: function() { alert("Done"); }</code>. This will be executed everytime the template is done rendering. This is only used with template_url.</li>
 					<li> <code class='inline'>sub: function(r) { }</code>. This function is a sub-router. You can use it to create url for specific posts (Eg- /post/2 or /user/akshay) and 'r' is the id(the '2' in /post/2).</li>
-				</ol>
+				</ul>
+			</div>
+		</div>
+		<div class='step'>
+			<div class='sub-title'>Linking</div>
+			<div class='text'>
+				<pre><code class='block'>
+&lt;button data-href='/about' data-selected='selected' &gt;&lt;/button&gt;
+				</code></pre>
+				<br />
+				<ul>
+					<li> <code class='inline'>data-href='/about'</code> is an advancement over the 'href'. Any element can have this.</li>
+					<li> <code class='inline'>data-selected='selected'</code> will add a class of selected to the link when that route is active.</li>
+				</ul>
+			</div>
+		</div>
+		<div class='step'>
+			<div class='sub-title'>Subrouting example</div>
+			<div class='text'>
+				<pre><code class='block'>
+rx.route({
+	name: 'post',
+	url: '/post',
+	template: '#about',
+	data: {
+		info: "Hello"
+	},
+	sub: function(pid) {
+		var post= getPostFromServer(pid);
+		rx.render_text('#post-template',{ post: post });
+	}
+});
+				</code></pre>
+				<br />
+				<ul>
+					<li> <code class='inline'>getPostFromServer(pid)</code> is your function that returns the post data.</li>
+					<li> <code class='inline'>rx.render_text(.....)</code> allows you to render stuff to container yourself. NOTE: The template will still be rendered in the '.container' that was declared in the initiation.</li>
+				</ul>
 			</div>
 		</div>
 	</div>

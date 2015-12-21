@@ -1,12 +1,12 @@
 body {
   margin: 0;
-  padding: 0;
-  background-color: #ddd; }
+  padding: 0; }
 
 * {
   font-family: "Lato", Helvetica, sans-serif;
-  color: #555;
-  box-sizing: border-box; }
+  color: #333;
+  box-sizing: border-box;
+  line-height: 27px; }
 
 nav {
   padding: 20px; }
@@ -33,24 +33,21 @@ nav {
         -ms-transition: all 0.2s ease-in-out; }
         nav ul li button:hover {
           color: #3B50CE; }
+        nav ul li button.selected {
+          border-bottom: 3px solid #3B50CE; }
 
 .container {
   min-width: 200px;
   max-width: 900px;
   margin: 30px auto;
-  background-color: #fff;
-  padding: 50px 20px;
-  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
-  -o-box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
-  -ms-box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2); }
+  padding: 50px 20px; }
 
 .title {
   font-size: 2em;
   text-align: center;
   padding: 10px 0;
-  border-bottom: 2px solid #3B50CE; }
+  border-bottom: 2px solid #3B50CE;
+  text-transform: uppercase; }
 
 .content {
   font-size: 1em;
@@ -61,7 +58,7 @@ nav {
   margin-top: 20px; }
   .step .sub-title {
     font-size: 1.3em;
-    border-left: 6px solid #F44336;
+    border-left: 6px solid #3B50CE;
     padding: 10px 5px 10px 20px;
     margin-bottom: 30px;
     font-weight: bold; }
@@ -69,10 +66,44 @@ nav {
     padding: 10px; }
     .step .text code {
       text-align: left;
-      background-color: #eee;
-      padding: 1px 10px; }
+      background-color: #2F343F;
+      color: #fff;
+      padding: 1px 10px;
+      font-family: "monospace"; }
       .step .text code.block {
         display: block;
-        padding-left: 20px; }
+        padding-left: 20px;
+        max-width: 800px;
+        margin: auto; }
+      .step .text code.inline {
+        font-style: italic;
+        font-size: 0.9em; }
+  .step ul {
+    max-width: 750px;
+    margin: auto; }
+    .step ul li {
+      padding: 7px 3px; }
+
+.shoot {
+  border: none;
+  outline: none;
+  background-color: #3B50CE;
+  padding: 4px 12px;
+  color: #fff;
+  font-size: 0.8em;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: block;
+  margin: 15px auto;
+  cursor: pointer;
+  border: 3px solid #3B50CE;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out; }
+  .shoot:hover {
+    background-color: transparent;
+    color: #3B50CE; }
 
 /*# sourceMappingURL=style.css.map */
