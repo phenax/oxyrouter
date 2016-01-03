@@ -1,0 +1,239 @@
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,900" />
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Oswald:400,900" />
+<link rel='stylesheet' type='text/css' href='css/style.css' />
+</head>
+<body>
+
+<nav>
+	<ul>
+		<li><a href='/'><img src='./oxygen.svg' class='logo'></a></li>
+		<li><a href="/#/" data-selected='selected'>Home</a></li>
+		<li><a href="/#/details" data-selected='selected'>Guide</a></li>
+		<li><a href="/#/test" data-selected='selected'>Demo</a></li>
+		<li><a href="/#/contact" data-selected='selected'>Contact Me</a></li>
+	</ul>
+</nav>
+
+<div class='container'></div>
+
+<div class='wow'></div>
+
+<script id='index' type='text/x-handlebars-template'>
+	<h1 class='title'>OxyRouter</h1>
+	<div class='content'>
+		&emsp;&emsp;&emsp;OxyRouter is a simple plugin for making front-end routes super-easy to make and use. OxyRouter is a part of project named Oxygen also FEE(Front-End Everything). <br /><br />
+		So, no more running to the backend just to make unnecessary routes that don't do much. And if you're making a static website, this will make the application much faster by cutting back the requests made to the server and only receiving the information you need.<br />
+		It integrates with handlebars to render templates. You can render templates from script tags as well as partial template files.
+		<br />
+		<br />
+				<div style='text-align:center;'>
+					<a class='shoot' href='/#/details'>Learn OxyRouter</a>
+				</div><br />
+
+	</div>
+</script>
+
+
+<script id='details' type='text/x-handlebars-template'>
+	<h1 class='title'>How to</h1>
+	<div class='content'>
+		<div class='step'>
+			<div class='sub-title'>Initiating OxyRouter</div>
+			<div class='text'>
+				<pre><code class='block'>
+var router= new OxyRouter({
+	otherwise: '/',
+	page: '.container',
+	defaultTitle: 'My Website'
+});
+				</code></pre>
+				<br />
+				<ul>
+					<li> <code class='inline'>new OxyRouter</code> is where it all starts.</li>
+					<li> <code class='inline'>otherwise: '/'</code>. This redirects requests from undefined routes to '/'.</li>
+					<li> <code class='inline'>page: '.container'</code>. Here, '.container' is css selector for the div where you want the contents to be placed.</li>
+					<li> <code class='inline'>defaultTitle: 'My Website'</code>. This sets the default title for all routes that a user navigates to.</li>
+				</ul>
+			</div>
+		</div>
+		<div class='step'>
+			<div class='sub-title'>Create a route</div>
+			<div class='text'>
+				<pre><code class='block'>
+router.route({
+	name: 'about',
+	title: 'About Us',
+	url: '/about',
+	template: '#about',
+	data: {
+		info: "Hello"
+	}
+});
+				</code></pre>
+				<br />
+				<ul>
+					<li> <code class='inline'>router.route</code> is used to create a route.</li>
+					<li> <code class='inline'>name: 'about'</code>. Used to identify your route(doesn't matter what it is).</li>
+					<li> <code class='inline'>title: 'About Us'</code>. It is the title of the page when a user navigates to that route.</li>
+					<li> <code class='inline'>url: '/about'</code>. Create a route at the url /#/about. </li>
+					<li> <code class='inline'>template: '#about'</code>. CSS selector for the template. </li>
+					<li> <code class='inline'>data: { info: "Hello" }</code>. Rendering text. </li>
+					<br />
+					<div style='font-weight:bold;padding:5px;'>Other stuff you can try</div>
+					<li> <code class='inline'>text: "Hello"</code>. To be used instead of template for rendering text. </li>
+					<li> <code class='inline'>template_url: "./part.html"</code>. To be used instead of template for templating using an html file. </li>
+					<li> <code class='inline'>success: function() { alert("Done"); }</code>. This will be executed everytime the template is done rendering. This is only used with template_url.</li>
+					<li> <code class='inline'>sub: function(r) { }</code>. This function is a sub-router. You can use it to create url for specific posts (Eg- /post/2 or /user/akshay) and 'r' is the id(the '2' in /post/2) (Example given below).</li>
+				</ul>
+			</div>
+		</div>
+		<div class='step'>
+			<div class='sub-title'>Subrouting example</div>
+			<div class='text'>
+				<pre><code class='block'>
+var getPostFromServer= function(pid) {
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (xhttp.readyState == 4 && xhttp.status == 200) {
+			fn(xhttp.responseText);
+		} else {
+			fn(new Error("Sorry, bruh... Something went wrong."));
+		}
+	};
+	xhttp.open("GET", "/post/"+pid, true);
+	xhttp.send();
+};
+
+// This is the important part!
+router.route({
+	name: 'post',
+	url: '/post',
+	template: '#about',
+	data: {
+		info: "Hello"
+	},
+	sub: function(pid) {
+		var post= getPostFromServer(pid,function(data) {
+			router.render_text('#post-template',{ post: data });
+		});
+	}
+});
+				</code></pre>
+				<br />
+				<ul>
+					<li> <code class='inline'>getPostFromServer(pid)</code> is your function that interacts with the server and returns the data required.</li>
+					<li> <code class='inline'>router.render_text(.....)</code> allows you to render stuff to container yourself. NOTE: The template will still be rendered in the '.container' that was declared in the initiation.</li>
+				</ul>
+			</div>
+		</div>
+		<div class='step'>
+			<div class='sub-title'>Linking</div>
+			<div class='text'>
+				<pre><code class='block'>
+&lt;a href='/#/about' data-selected='route-active' &gt;&lt;/a&gt;
+				</code></pre>
+				<br />
+				<ul>
+					<li> <code class='inline'>href='/#/about'</code>. You obviously know what this does.</li>
+					<li> <code class='inline'>data-selected='route-active'</code> will add a class of 'route-active' to the link when that route is active.</li>
+				</ul>
+			</div>
+		</div>
+		<div class='step'>
+			<div class='sub-title'>Psuedo GET Requests</div>
+			<div class='text'>
+				<pre><code class='block'>
+router.route({
+  name: 'post',
+  url: '/post',
+  template: '#about',
+  data: { },
+  get: function(data) {
+    if(data.pid && data.page) {
+      var post= getPostFromServer(data.pid,data.page);
+      router.render_text('#post-template',{ post: post });
+    } else {
+      // For no request
+  }
+}
+});
+				</code></pre>
+				<br />
+				<ul>
+					<li> <code class='inline'>get: function(data) { ...</code>. This function can be used to perform actions on the requests made and give the user an output.</li>
+					<li> <code class='inline'>getPostFromServer(pid)</code> is your function that interacts with the server and returns the data required.</li>
+					<li> <code class='inline'>router.render_text(.....)</code> allows you to render stuff to container yourself. NOTE: The template will still be rendered in the '.container' that was declared in the initiation.</li>
+				</ul>
+			</div>
+		</div>
+		<div class='step'>
+			<div class='sub-title'>My work here is done</div>
+			<div class='text'>
+<!--			<pre><code class='block'>
+router.route_check();
+				</code></pre> -->
+				<br />
+				<br />
+				All your routes are set up and your application is good to go. You can check out the examples <a href='/#/test'>here</a>.
+			</div>
+		</div>
+	</div>
+</script>
+
+<script id='just_test' type='text/x-handlebars-template'>
+	<div class='title'>Demo</div>
+	<div class='step'>
+		<div class='sub-title'>{{title}}</div>
+		<ul>
+			{{#each wtf}}
+				<li>{{this}}</li>
+			{{/each}}
+		</ul>
+	<div class='step'>
+	<div class='sub-title'>Other tests</div>
+		<div><a href='/#/test/get?key=hello&id=25'>Psuedo GET requests</a></div>
+		<div><a href='/#/test/sub/hello_world'>SubRoutes</a></div>
+		<div><a href='/#/test/part'>Rendering from a file</a></div>
+	</div>
+</script>
+
+<script id='test' type='text/x-handlebars-template'>
+	<div class='title'>Demo</div>
+	<div style='max-width:400px;margin:40px auto;background-color:#444;'>
+		<pre style='color:#fff;padding:20px;'>{{get}}</pre>
+	</div>
+</script>
+
+<script id='sub' type='text/x-handlebars-template'>
+	<div class='title'>Demo</div>
+	<div class='step'>
+		<div class='sub-title'>{{title}}. The function&nbsp;`doing_something` modified the data to look presentable.</div>
+		<div>
+			<span>Post ID after modification</span>: {{sub}}
+		</div>
+	</div>
+</script>
+
+<script id='part' type='text/x-handlebars-template'>
+
+</script>
+
+<script id='contact' type='text/x-handlebars-template'>
+	<div class='title'>Get in touch</div>
+	<div class='step'>
+		<div style='text-align:center;' class='contact'>
+			<div>Facebook: <a target='_blank' href='https://facebook.com/einstein1997'>Akshay Nair</a></div>
+			<div>Twitter: <a target='_blank' href='https://twitter.com/phenax5'>@phenax5</a></div>
+			<div>Codepen: <a target='_blank' href='http://codepen.io/phenax'>@phenax</a></div>
+			<div>Github: <a target='_blank' href='http://github.com/phenax'>@phenax</a></div>
+		</div>
+	</div>
+</script>
+
+<script src="./bower_components/handlebars/handlebars.js"></script>
+<script src="./js/oxygen.router.js"></script>
+</body>
+</html>

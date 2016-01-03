@@ -1,0 +1,165 @@
+@import 'import';
+
+$colo:#0F1011;
+$color:#2B2E37;
+$coloro:#2F343F;
+
+body {
+	margin:0;
+	padding:0;
+	background-color:#222;
+}
+* {
+	font-family:$font;
+	color:#ddd;
+	box-sizing:border-box;
+	line-height:20px;
+}
+
+.contact {
+	div {
+		padding:20px;
+
+		a {
+			&:hover {
+				color:$red;
+			}
+		}
+	}
+}
+
+nav {
+	padding:10px;
+	position:absolute;
+	left:10px;
+	top:0px;
+
+
+	ul {
+		list-style:none;
+		padding:0;
+		margin:0;
+		padding-right:30px;
+
+		li {
+			display:inline-block;
+			padding:0;
+
+			a {
+				display:inline-block;
+				padding:10px 15px;
+				font-size:1em;
+				background-color:transparent;
+				cursor:pointer;
+				text-decoration:none;
+				@include transition(all 0.2s ease-in-out);
+
+				&:hover {
+					color:$blue;
+				}
+			}
+		}
+	}
+}
+
+.selected {
+	border-bottom:3px solid $blue;
+}
+
+.container {
+	min-width:200px;
+	max-width:900px;
+	margin:100px auto;
+	padding:50px 20px;
+}
+
+.title {
+	font-size:2em;
+	text-align:center;
+	padding:10px 0;
+	border-bottom:2px solid $blue;
+	text-transform: uppercase;
+	font-family:$font_alt;
+	color:#fff;
+}
+
+.content {
+	font-size:1em;
+	padding:10px;
+}
+
+.logo {
+	height:40px;
+	@include transform(translateY(15px));
+}
+
+.step {
+	padding:20px 5px;
+	margin-top:20px;
+
+	.sub-title {
+		font-size:1.3em;
+		border-left:6px solid $blue;
+		padding:10px 5px 10px 20px;
+		margin-bottom:30px;
+		font-weight:bold;
+		font-family:$font_alt;
+	}
+
+	.text {
+		padding:10px;
+
+		code {
+			text-align:left;
+			background-color:$coloro;
+			color:#fff;
+			padding:1px 10px;
+			font-family:"monospace";
+
+			&.block {
+				display:block;
+				padding:30px 20px;
+				max-width:800px;
+				margin:auto;
+				word-wrap:break-word;
+			}
+
+			&.inline {
+				font-size:0.9em;
+				padding:2px 8px;
+				background-color:#555;
+			}
+		}
+
+	}
+
+	ul {
+		max-width:750px;
+		margin:auto;
+
+		li {
+			padding:7px 3px;
+		}
+	}
+}
+
+.shoot {
+	background-color:$blue;
+	padding:4px 12px;
+	color:#fff;
+	text-align:center;
+	text-decoration: none;
+	font-size:0.8em;
+	font-weight:bold;
+	text-transform:uppercase;
+	display:inline-block;
+	margin:20px auto;
+	cursor:pointer;
+	border:3px solid $blue;
+	@include transition(all 0.3s ease-in-out);
+
+	&:hover {
+		background-color:transparent;
+		color:$blue;
+	}
+}
