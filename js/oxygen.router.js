@@ -9,6 +9,7 @@ function OxyRouter(config) {                                                    
 }
 
 OxyRouter.prototype._hash_listener= function() {
+	document.addEventListener('DOMContentLoaded',this.route_check.bind(this));
 	window.addEventListener('hashchange',this.route_check.bind(this));
 };
 
@@ -137,8 +138,6 @@ OxyRouter.prototype.route= function(data) {                                    /
 	} else {                                        // Error
 		console.error(new Error("Error in route config for "+data.url));
 	}
-
-	this.route_check();
 };
 
 OxyRouter.prototype.render_text= function(target,data) {
