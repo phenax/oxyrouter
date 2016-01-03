@@ -1,28 +1,34 @@
 <!doctype html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,900" />
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Oswald:400,900" />
 <link rel='stylesheet' type='text/css' href='css/style.css' />
 </head>
 <body>
 
 <nav>
 	<ul>
+		<li><a href='/'><img src='./oxygen.svg' class='logo'></a></li>
 		<li><a href="/#/" data-selected='selected'>Home</a></li>
-		<li><a href="/#/details" data-selected='selected'>How to use it</a></li>
-		<li><a href="/#/test" data-selected='selected'>Test route</a></li>
+		<li><a href="/#/details" data-selected='selected'>Guide</a></li>
+		<li><a href="/#/test" data-selected='selected'>Demo</a></li>
+		<li><a href="/#/contact" data-selected='selected'>Contact Me</a></li>
 	</ul>
 </nav>
-
 
 <div class='container'></div>
 
 <div class='wow'></div>
 
-
 <script id='index' type='text/x-handlebars-template'>
 	<h1 class='title'>OxyRouter</h1>
 	<div class='content'>
-		&emsp;&emsp;&emsp;OxyRouter is a simple plugin for making front-end routes super-easy to use. OxyRouter is a part of project named Oxygen also FEE(Front-End Everything).<br />
+		&emsp;&emsp;&emsp;OxyRouter is a simple plugin for making front-end routes super-easy to make and use. OxyRouter is a part of project named Oxygen also FEE(Front-End Everything). <br /><br />
+		So, no more running to the backend just to make unnecessary routes that don't do much. And if you're making a static website, this will make the application much faster by cutting back the requests made to the server and only receiving the information you need.<br />
+		It integrates with handlebars to render templates. You can render templates from script tags as well as partial template files.
+		<br />
+		<br />
 				<div style='text-align:center;'>
 					<a class='shoot' href='/#/details'>Learn OxyRouter</a>
 				</div><br />
@@ -177,11 +183,8 @@ router.route_check();
 	</div>
 </script>
 
-<script id='about' type='text/x-handlebars-template'>
-	<a href='/#/about/new'>{{text}}</a>
-</script>
-
 <script id='just_test' type='text/x-handlebars-template'>
+	<div class='title'>Demo</div>
 	<div class='step'>
 		<div class='sub-title'>{{title}}</div>
 		<ul>
@@ -198,13 +201,14 @@ router.route_check();
 </script>
 
 <script id='test' type='text/x-handlebars-template'>
-	<h2 style='text-align:center;'>PsuedoGET request parameters</h2>
+	<div class='title'>Demo</div>
 	<div style='max-width:400px;margin:40px auto;background-color:#444;'>
 		<pre style='color:#fff;padding:20px;'>{{get}}</pre>
 	</div>
 </script>
 
 <script id='sub' type='text/x-handlebars-template'>
+	<div class='title'>Demo</div>
 	<div class='step'>
 		<div class='sub-title'>{{title}}. The function&nbsp;`doing_something` modified the data to look presentable.</div>
 		<div>
@@ -217,6 +221,17 @@ router.route_check();
 
 </script>
 
+<script id='contact' type='text/x-handlebars-template'>
+	<div class='title'>Get in touch</div>
+	<div class='step'>
+		<div style='text-align:center;' class='contact'>
+			<div>Facebook: <a target='_blank' href='https://facebook.com/einstein1997'>Akshay Nair</a></div>
+			<div>Twitter: <a target='_blank' href='https://twitter.com/phenax5'>@phenax5</a></div>
+			<div>Codepen: <a target='_blank' href='http://codepen.io/phenax'>@phenax</a></div>
+			<div>Github: <a target='_blank' href='http://github.com/phenax'>@phenax</a></div>
+		</div>
+	</div>
+</script>
 
 <script src="./bower_components/handlebars/handlebars.js"></script>
 <script src="./js/oxygen.router.js"></script>

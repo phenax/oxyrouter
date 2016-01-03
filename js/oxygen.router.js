@@ -238,3 +238,11 @@ router.route({
 		alert("Loaded");
 	}
 });
+
+router.route({
+	name:'contact',
+	url:'/contact',
+	title: 'Contact Me',
+	template:'#contact',
+	data: {}
+});

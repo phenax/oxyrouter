@@ -7,23 +7,39 @@ $coloro:#2F343F;
 body {
 	margin:0;
 	padding:0;
+	background-color:#222;
 }
 * {
 	font-family:$font;
-	color:#333;
+	color:#ddd;
 	box-sizing:border-box;
-	line-height:25px;
+	line-height:20px;
+}
+
+.contact {
+	div {
+		padding:20px;
+
+		a {
+			&:hover {
+				color:$red;
+			}
+		}
+	}
 }
 
 nav {
-	padding:20px;
+	padding:10px;
+	position:absolute;
+	left:10px;
+	top:0px;
+
 
 	ul {
 		list-style:none;
 		padding:0;
 		margin:0;
 		padding-right:30px;
-		text-align: center;
 
 		li {
 			display:inline-block;
@@ -53,7 +69,7 @@ nav {
 .container {
 	min-width:200px;
 	max-width:900px;
-	margin:30px auto;
+	margin:100px auto;
 	padding:50px 20px;
 }
 
@@ -63,11 +79,18 @@ nav {
 	padding:10px 0;
 	border-bottom:2px solid $blue;
 	text-transform: uppercase;
+	font-family:$font_alt;
+	color:#fff;
 }
 
 .content {
 	font-size:1em;
 	padding:10px;
+}
+
+.logo {
+	height:40px;
+	@include transform(translateY(15px));
 }
 
 .step {
@@ -80,6 +103,7 @@ nav {
 		padding:10px 5px 10px 20px;
 		margin-bottom:30px;
 		font-weight:bold;
+		font-family:$font_alt;
 	}
 
 	.text {
@@ -94,14 +118,16 @@ nav {
 
 			&.block {
 				display:block;
-				padding-left:20px;
+				padding:30px 20px;
 				max-width:800px;
 				margin:auto;
+				word-wrap:break-word;
 			}
 
 			&.inline {
-				font-style: italic;
 				font-size:0.9em;
+				padding:2px 8px;
+				background-color:#555;
 			}
 		}
 
