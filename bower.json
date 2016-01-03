@@ -1,0 +1,28 @@
+{
+  "name": "router_oxygen",
+  "authors": [
+    "Akshay Nair <phenax5@gmail.com>"
+  ],
+  "description": "Front-end routing made simple. You can use it without oxygen as a standalone.",
+  "main": "index.html",
+  "moduleType": [],
+  "keywords": [
+    "front",
+    "end",
+    "router",
+    "plugin",
+    "javascript"
+  ],
+  "license": "Apache v2",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "handlebars": "~4.0.5"
+  }
+}

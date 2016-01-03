@@ -23,31 +23,31 @@ nav {
 		padding:0;
 		margin:0;
 		padding-right:30px;
-		text-align: right;
+		text-align: center;
 
 		li {
 			display:inline-block;
 			padding:0;
 
-			button {
-				outline:none;
-				border:none;
+			a {
+				display:inline-block;
 				padding:10px 15px;
 				font-size:1em;
 				background-color:transparent;
 				cursor:pointer;
+				text-decoration:none;
 				@include transition(all 0.2s ease-in-out);
 
 				&:hover {
 					color:$blue;
 				}
-
-				&.selected {
-					border-bottom:3px solid $blue;
-				}
 			}
 		}
 	}
+}
+
+.selected {
+	border-bottom:3px solid $blue;
 }
 
 .container {
@@ -118,16 +118,16 @@ nav {
 }
 
 .shoot {
-	border:none;
-	outline:none;
 	background-color:$blue;
 	padding:4px 12px;
 	color:#fff;
+	text-align:center;
+	text-decoration: none;
 	font-size:0.8em;
 	font-weight:bold;
 	text-transform:uppercase;
-	display:block;
-	margin:15px auto;
+	display:inline-block;
+	margin:20px auto;
 	cursor:pointer;
 	border:3px solid $blue;
 	@include transition(all 0.3s ease-in-out);
