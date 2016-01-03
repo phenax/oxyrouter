@@ -1,3 +1,7 @@
 .sass-cache
+<<<<<<< HEAD
 *.css.map
 bower_components
+=======
+*.css.map
+>>>>>>> bb41a8ce5b96dd630b432af86a16f7f637c403cc
