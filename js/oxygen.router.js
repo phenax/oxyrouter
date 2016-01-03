@@ -107,7 +107,7 @@ OxyRouter.prototype.route_check= function() {                                 //
 };
 
 OxyRouter.prototype.parse_get= function(route) {
-	var get_content= [];
+	var get_content= {};
 	var hash= window.location.hash;
 	if(hash.indexOf('?') != -1) {
 		var get= hash.split("?");
@@ -117,7 +117,7 @@ OxyRouter.prototype.parse_get= function(route) {
 			var str= get[k].split("=");
 			var key= str[0];
 			var value= str[1];
-			get_content.push({name: key, value: value});
+			get_content[key] = value;
 		}
 	}
 
@@ -137,6 +137,8 @@ OxyRouter.prototype.route= function(data) {                                    /
 	} else {                                        // Error
 		console.error(new Error("Error in route config for "+data.url));
 	}
+
+	this.route_check();
 };
 
 OxyRouter.prototype.render_text= function(target,data) {
@@ -180,7 +182,7 @@ router.route({
 	template: "#test",
 	data: {},
 	get: function(dat) {
-		router.render_text(this.template, { get:dat });
+		router.render_text(this.template, { get:JSON.stringify(dat,null,4) });
 	}
 });
 
@@ -226,21 +228,14 @@ router.route({
 });
 
 
-/*router.route({
-	name: "test",
-	url: "/test",
-	template: "#just_test",
+router.route({
+	name: "part",
+	url: "/test/part",
+	template_url: "./part.html",
 	data: {
-		title: "Basic templating",
-		wtf: [
-			"Element #1",
-			"Element #2",
-			"Element #3",
-			"Element #4",
-			"Element #5"
-		]
+		title: "Rendering from a template file"
+	},
+	success: function(dat) {
+		alert("Loaded");
 	}
-});*/
-
-
-router.route_check();
+});
