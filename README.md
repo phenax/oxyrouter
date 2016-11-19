@@ -1,8 +1,10 @@
 OxyRouter
 ======
 
-OxyRouter is a simple plugin for making front-end routes super-easy to make and use. OxyRouter is a part of project named Oxygen also FEE(Front-End Everything).
-		So, no more running to the backend just to make unnecessary routes that don't do much. And if you're making a static website, this will make the application much faster by cutting back the requests made to the server and only receiving the information you need.
+OxyRouter is a simple plugin for making front-end routes super-easy to make and use. [DEMO](http://phenax.github.io/oxyrouter)
+
+
+So, no more running to the backend just to make unnecessary routes that don't do much. And if you're making a static website, this will make the application much faster by cutting back the requests made to the server and only receiving the information you need.
 		It integrates with handlebars to render templates. You can render templates from script tags as well as partial template files.
 		
 ## Guide
