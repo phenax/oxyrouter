@@ -1,6 +1,8 @@
 OxyRouter
 ======
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/phenax/oxyrouter.svg)](https://greenkeeper.io/)
+
 OxyRouter is a simple plugin for making front-end routes super-easy to make and use. [DEMO](http://phenax.github.io/oxyrouter)
 
 
